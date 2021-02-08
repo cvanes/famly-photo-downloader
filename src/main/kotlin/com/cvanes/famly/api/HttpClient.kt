@@ -1,4 +1,4 @@
-package com.cvanes.famly
+package com.cvanes.famly.api
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.util.StdDateFormat

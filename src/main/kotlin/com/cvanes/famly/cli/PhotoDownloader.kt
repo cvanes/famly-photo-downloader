@@ -1,7 +1,7 @@
 package com.cvanes.famly.cli
 
 import com.cvanes.famly.api.ApiClient
-import com.cvanes.famly.newHttpClient
+import com.cvanes.famly.api.newHttpClient
 import kotlinx.coroutines.runBlocking
 import picocli.CommandLine
 import picocli.CommandLine.Command
