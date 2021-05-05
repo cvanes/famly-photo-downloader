@@ -9,9 +9,10 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.time.OffsetDateTime
@@ -29,7 +30,7 @@ class ApiClient(
 
     private val logger = LoggerFactory.getLogger(ApiClient::class.java)
 
-    suspend fun downloadPhotos(startDate: OffsetDateTime, endDate: OffsetDateTime) = coroutineScope {
+    suspend fun downloadPhotos(startDate: OffsetDateTime, endDate: OffsetDateTime) = withContext(Dispatchers.IO) {
         val authContext = authenticate()
 
         logger.info("Downloading images from $startDate to $endDate")
@@ -40,6 +41,7 @@ class ApiClient(
                 .map { async { downloadPhoto(it) } }
                 .awaitAll()
         }
+
         logger.info("Downloaded images in ${duration}ms")
     }
 

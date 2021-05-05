@@ -19,7 +19,7 @@ import io.ktor.http.contentType
 fun newHttpClient() = HttpClient(CIO) {
     install(Logging) {
         logger = Logger.DEFAULT
-        level = LogLevel.NONE
+        level = LogLevel.INFO
     }
 
     install(JsonFeature) {
@@ -38,9 +38,10 @@ fun newHttpClient() = HttpClient(CIO) {
     engine {
         maxConnectionsCount = 50
         endpoint {
-            maxConnectionsPerRoute = 10
-            keepAliveTime = 5000
-            connectTimeout = 5000
+            maxConnectionsPerRoute = 50
+            keepAliveTime = 10000
+            connectTimeout = 10000
+            connectAttempts = 3
             socketTimeout = 30000
         }
     }
